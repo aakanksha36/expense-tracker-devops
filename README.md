@@ -1,20 +1,37 @@
-# Expense Tracker DevOps
+# Expense Tracking and Management System
 
-## Quick Start
-
-1. `cd expense-tracker-devops`
-2. `npm install`
-3. Run locally: `npm start` (needs MongoDB running on localhost:27017)
-4. Or Docker: `docker-compose up --build`
-
-Open http://localhost:3000
+## Problem Statement
+Managing expenses manually is inefficient and does not provide proper insights into spending, budget control, and category-wise analysis. This project provides an interactive expense dashboard with budgets, analytics, Docker containerization, and CI/CD pipeline integration.
 
 ## Features
-- Add, view, delete expenses
-- MongoDB backend
-- Frontend UI
-- CI/CD with GitHub Actions
-- Docker containerized
+- Add, edit, and delete expenses
+- Category-wise budget tracking
+- Dashboard with KPI cards
+- Category, monthly, and payment mode charts
+- Search, filter, and sort expenses
+- Export data as CSV
+- MongoDB database integration
+- Docker containerization
+- GitHub Actions CI/CD pipeline
 
-## Tests
-`npm test`
+## Tech Stack
+- HTML, CSS, JavaScript
+- Node.js
+- Express.js
+- MongoDB
+- Docker
+- GitHub Actions
+- Render
+
+## Project Structure
+- `app.js` - backend API routes
+- `db.js` - database connection
+- `server.js` - application entry point
+- `public/` - frontend files
+- `Dockerfile` - app container configuration
+- `docker-compose.yml` - multi-container setup
+
+## How to Run Locally
+```bash
+npm install
+docker-compose up --build
