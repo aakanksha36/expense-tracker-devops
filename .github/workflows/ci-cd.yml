@@ -28,7 +28,7 @@ jobs:
         run: npm run lint
 
       - name: Run tests
-        run: npm test -- --detectOpenHandles
+        run: npm test -- --runInBand --forceExit
 
       - name: Build Docker image
         run: docker build -t expense-tracker-devops-app .
