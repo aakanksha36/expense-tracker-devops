@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Tracker Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <h2>ExpensePro</h2>
+      <nav>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#add-expense">Add Expense</a>
+        <a href="#set-budget">Set Budget</a>
+        <a href="#budget-insights">Budget Insights</a>
+        <a href="#charts">Charts</a>
+        <a href="#transactions">Transactions</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <h1>Expense Tracking & Management Dashboard</h1>
+          <p>Track your spending, budgets, and financial insights in one place.</p>
+        </div>
+        <div class="topbar-actions">
+          <button onclick="exportCSV()">Export CSV</button>
+          <button onclick="toggleDarkMode()">Toggle Theme</button>
+        </div>
+      </header>
+
+      <section class="kpi-grid" id="dashboard">
+        <div class="kpi-card">
+          <h3>Total Expense</h3>
+          <p id="totalExpenseCard">₹0</p>
+        </div>
+        <div class="kpi-card">
+          <h3>Total Budget</h3>
+          <p id="totalBudgetCard">₹0</p>
+        </div>
+        <div class="kpi-card">
+          <h3>Remaining Budget</h3>
+          <p id="remainingBudgetCard">₹0</p>
+        </div>
+        <div class="kpi-card">
+          <h3>Top Category</h3>
+          <p id="topCategoryCard">N/A</p>
+        </div>
+        <div class="kpi-card">
+          <h3>Total Transactions</h3>
+          <p id="totalTransactionsCard">0</p>
+        </div>
+      </section>
+
+      <section class="form-grid">
+        <div class="card" id="add-expense">
+          <h2>Add / Edit Expense</h2>
+          <form id="expenseForm">
+            <input type="hidden" id="expenseId" />
+            <input type="text" id="title" placeholder="Expense Title" required />
+            <input type="number" id="amount" placeholder="Amount" required />
+            <input type="text" id="category" placeholder="Category" required />
+            <input type="date" id="date" required />
+            <select id="paymentMode">
+              <option value="Cash">Cash</option>
+              <option value="UPI">UPI</option>
+              <option value="Card">Card</option>
+              <option value="Net Banking">Net Banking</option>
+            </select>
+            <textarea id="notes" placeholder="Notes (optional)"></textarea>
+            <div class="button-row">
+              <button type="submit" id="expenseSubmitBtn">Save Expense</button>
+              <button type="button" onclick="resetExpenseForm()">Clear</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card" id="set-budget">
+          <h2>Set Category Budget</h2>
+          <form id="budgetForm">
+            <input type="text" id="budgetCategory" placeholder="Category" required />
+            <input type="number" id="budgetLimit" placeholder="Budget Limit" required />
+            <button type="submit">Save Budget</button>
+          </form>
+
+          <div class="budget-mini-info">
+            <h3>Quick Filters</h3>
+            <input type="text" id="filterCategory" placeholder="Filter by category" />
+            <input type="month" id="filterMonth" />
+            <input type="text" id="searchInput" placeholder="Search title / notes / payment mode" />
+            <select id="sortBy">
+              <option value="date">Sort by Date</option>
+              <option value="amount">Sort by Amount</option>
+              <option value="title">Sort by Title</option>
+              <option value="category">Sort by Category</option>
+            </select>
+            <select id="sortOrder">
+              <option value="desc">Descending</option>
+              <option value="asc">Ascending</option>
+            </select>
+            <div class="button-row">
+              <button type="button" onclick="loadExpenses()">Apply</button>
+              <button type="button" onclick="clearFilters()">Clear</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="budget-insights">
+        <h2>Budget Insights</h2>
+        <div id="budgetProgressContainer"></div>
+      </section>
+
+      <section class="chart-grid" id="charts">
+        <div class="card chart-card">
+          <h2>Category-wise Spending</h2>
+          <div class="chart-container">
+            <canvas id="categoryChart"></canvas>
+          </div>
+        </div>
+        <div class="card chart-card">
+          <h2>Monthly Expense Trend</h2>
+          <div class="chart-container">
+            <canvas id="monthlyChart"></canvas>
+          </div>
+        </div>
+        <div class="card chart-card">
+          <h2>Payment Mode Analysis</h2>
+          <div class="chart-container">
+            <canvas id="paymentChart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="transactions">
+        <h2>Transactions</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th>Payment</th>
+                <th>Notes</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="expenseTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Quick Summary</h2>
+        <div id="summary"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
