@@ -8,7 +8,7 @@ const app = express();
 function getMonth(dateString) {
   return new Date(dateString).toISOString().slice(0, 7);
 }
-
+// .
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
