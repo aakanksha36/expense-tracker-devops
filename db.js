@@ -22,5 +22,5 @@ function getDb() {
   }
   return database;
 }
-
+// connection
 module.exports = { connectDB, getDb };
